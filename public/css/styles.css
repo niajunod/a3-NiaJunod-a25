@@ -1,133 +1,126 @@
-/* styles.css */
-
-/* Color palette (color-blind friendly) */
+/* Custom color palette */
 :root {
-    --dark-navy: #2b2d42;
-    --steel-blue: #8d99ae;
-    --white: #ffffff;
-    --accent: #ef233c;  /* vivid red for emphasis, passes WCAG contrast */
-    --light-gray: #f8f9fa;
-    --text-dark: #222222;
+    --pink: #E29EFA;
+    --blue: #649EE0;
+    --white: #FFFFFF;
+    --accent: #8F9EE1;
+    --dark: #2D4A1B;
 }
 
-/* Reset & base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 100%;
-    scroll-behavior: smooth;
-}
-
+/* Body and font */
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--white);
-    background: linear-gradient(135deg, var(--dark-navy), var(--steel-blue));
-    line-height: 1.6;
+    background-color: var(--white);
+    color: #222;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1rem;
-    font-weight: 700;
-    color: var(--white);
+/* Navbar */
+.navbar {
+    background-color: var(--white);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-/* Paragraphs */
-p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: var(--light-gray);
-}
-
-/* Links */
-a {
-    color: var(--accent);
-    text-decoration: none;
+.navbar-brand {
     font-weight: 600;
+    color: var(--dark) !important;
+    font-size: 1.5rem;
 }
 
-a:hover,
-a:focus {
-    text-decoration: underline;
-}
-
-/* Navigation */
-nav {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 1rem;
-    text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-
-nav li {
-    display: inline;
+#nav-username {
+    font-weight: 500;
+    color: var(--blue);
 }
 
 /* Buttons */
-button, .btn {
-    background-color: var(--accent);
+.btn-primary {
+    background-color: var(--blue);
+    border-color: var(--blue);
     color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-success {
+    background-color: var(--pink);
+    border-color: var(--pink);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+/* Cards */
+.card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
     border: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    background-color: var(--white);
 }
 
-button:hover, .btn:hover,
-button:focus, .btn:focus {
-    background-color: #d90429; /* darker red for hover/focus */
-    outline: none;
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
-/* Containers */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
+.form-control:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 5px var(--blue);
 }
 
-/* Footer */
-footer {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: var(--light-gray);
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    margin-top: 2rem;
+/* Tables */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/* Responsive design */
+.table thead {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color: rgba(100, 158, 224, 0.1);
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: rgba(100, 158, 224, 0.05);
+}
+
+.table tbody tr:hover {
+    background-color: rgba(100, 158, 224, 0.2);
+}
+
+/* Stats list */
+.list-group-item {
+    border: none;
+    background-color: #f9faff;
+    font-weight: 500;
+}
+
+.list-group-item strong {
+    color: var(--blue);
+}
+
+/* Small responsive tweaks */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
+    .card {
+        margin: 1rem;
     }
 }
