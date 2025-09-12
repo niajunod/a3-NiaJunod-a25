@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
 
 // Models
 const User = require("./models/User");
@@ -28,23 +28,17 @@ mongoose
     .then(async () => {
         console.log("✅ Connected to MongoDB");
 
-        // --- Seed test user ---
-        try {
-            const existing = await User.findOne({ username: "testuser" });
-            if (!existing) {
-                const hashed = await bcrypt.hash("password123", 10);
-                await User.create({ username: "testuser", passwordHash: hashed });
-                console.log("👤 Test user created: testuser / password123");
-            } else {
-                console.log("👤 Test user already exists");
-            }
-        } catch (err) {
-            console.error("❌ Error creating test user:", err.message);
+        // Seed test user
+        const existing = await User.findOne({ username: "testuser" });
+        if (!existing) {
+            const hashed = await bcrypt.hash("password123", 10);
+            await User.create({ username: "testuser", passwordHash: hashed });
+            console.log("👤 Test user created: testuser / password123");
+        } else {
+            console.log("👤 Test user already exists");
         }
     })
-    .catch((err) => {
-        console.error("❌ MongoDB connection error:", err.message);
-    });
+    .catch((err) => console.error("❌ MongoDB connection error:", err.message));
 
 // Routes
 app.use("/api", apiRoutes);
@@ -54,7 +48,6 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

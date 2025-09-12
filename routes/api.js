@@ -1,86 +1,109 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
-
 const User = require("../models/User");
 const Shift = require("../models/Shift");
 
-// --- User login / registration ---
+const router = express.Router();
+
+// Temporary "session" variable for current user
+let currentUser = null;
+
+// --- LOGIN / LOGOUT ---
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return res.status(400).json({ error: "Username and password required" });
-    }
-
     try {
+        const { username, password } = req.body;
+
         let user = await User.findOne({ username });
 
         // If user doesn't exist, create
         if (!user) {
-            const passwordHash = await bcrypt.hash(password, 10);
-            user = await User.create({ username, passwordHash });
-            return res.json({ message: "User created", username: user.username, id: user._id });
+            const hashed = await bcrypt.hash(password, 10);
+            user = await User.create({ username, passwordHash: hashed });
         }
 
         // Compare passwords
         const match = await bcrypt.compare(password, user.passwordHash);
-        if (!match) return res.status(401).json({ error: "Invalid password" });
+        if (!match) return res.status(401).json({ error: "Invalid credentials" });
 
-        res.json({ message: "Login successful", username: user.username, id: user._id });
+        currentUser = user;
+        res.json({ username: user.username, _id: user._id });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(500).json({ error: "Login failed" });
     }
 });
 
-// --- Get all shifts for a user ---
-router.get("/shifts/:userId", async (req, res) => {
-    try {
-        const shifts = await Shift.find({ userId: req.params.userId });
-        res.json(shifts);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
+router.post("/logout", (req, res) => {
+    currentUser = null;
+    res.json({ success: true });
 });
 
-// --- Add new shift ---
+// --- SHIFTS ---
+router.get("/shifts", async (req, res) => {
+    if (!currentUser) return res.status(401).json({ error: "Not logged in" });
+
+    const shifts = await Shift.find({ user: currentUser._id }).lean();
+    res.json(shifts);
+});
+
 router.post("/shifts", async (req, res) => {
-    const { userId, restaurant, hours, tips } = req.body;
-
-    if (!userId || !restaurant || hours == null || tips == null) {
-        return res.status(400).json({ error: "All fields are required" });
-    }
+    if (!currentUser) return res.status(401).json({ error: "Not logged in" });
 
     try {
-        const shift = await Shift.create({ userId, restaurant, hours, tips });
+        const { restaurant, hours, tips } = req.body;
+        const shift = await Shift.create({
+            restaurant,
+            hours,
+            tips,
+            user: currentUser._id,
+        });
         res.json(shift);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ error: "Failed to save shift" });
     }
 });
 
-// --- Update shift ---
 router.put("/shifts/:id", async (req, res) => {
+    if (!currentUser) return res.status(401).json({ error: "Not logged in" });
+
     try {
-        const updated = await Shift.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(updated);
+        const { restaurant, hours, tips } = req.body;
+        const shift = await Shift.findOneAndUpdate(
+            { _id: req.params.id, user: currentUser._id },
+            { restaurant, hours, tips },
+            { new: true }
+        );
+        if (!shift) return res.status(404).json({ error: "Shift not found" });
+        res.json(shift);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ error: "Failed to update shift" });
     }
 });
 
-// --- Delete shift ---
 router.delete("/shifts/:id", async (req, res) => {
+    if (!currentUser) return res.status(401).json({ error: "Not logged in" });
+
     try {
-        await Shift.findByIdAndDelete(req.params.id);
-        res.json({ message: "Shift deleted" });
+        await Shift.findOneAndDelete({ _id: req.params.id, user: currentUser._id });
+        res.json({ success: true });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ error: "Failed to delete shift" });
+    }
+});
+
+router.get("/shifts/:id", async (req, res) => {
+    if (!currentUser) return res.status(401).json({ error: "Not logged in" });
+
+    try {
+        const shift = await Shift.findOne({ _id: req.params.id, user: currentUser._id }).lean();
+        if (!shift) return res.status(404).json({ error: "Shift not found" });
+        res.json(shift);
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: "Failed to fetch shift" });
     }
 });
 
