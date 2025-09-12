@@ -1,0 +1,23 @@
+/* public/css/style.css */
+:root {
+    --pink: #E29EFA;
+    --blue: #649EE0;
+    --white: #FFFFFF;
+    --accent: #8F9EE1;
+    --dark: #2D4A1B;
+}
+
+body {
+    background: linear-gradient(180deg, #fff 0%, #f9faff 100%);
+    color: #222;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--dark) !important;
+}
+
+.card {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
