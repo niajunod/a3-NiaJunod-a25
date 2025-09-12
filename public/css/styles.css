@@ -1,142 +1,133 @@
-/* ================================
-   Custom color palette (accessible)
-   ================================ */
+/* styles.css */
+
+/* Color palette (color-blind friendly) */
 :root {
-    --teal-dark: #006D77;      /* strong teal */
-    --teal-light: #83C5BE;     /* light teal/green */
-    --white: #FFFFFF;
-    --gray-dark: #222222;      /* text color */
-    --gray-light: #f9faff;
-    --accent: #FFB703;         /* bright amber for highlights */
-    --green: #2D6A4F;          /* accessible success green */
-    --blue: #1D3557;           /* deep navy blue */
+    --dark-navy: #2b2d42;
+    --steel-blue: #8d99ae;
+    --white: #ffffff;
+    --accent: #ef233c;  /* vivid red for emphasis, passes WCAG contrast */
+    --light-gray: #f8f9fa;
+    --text-dark: #222222;
 }
 
-/* ================================
-   Body and font
-   ================================ */
-body {
-    background: linear-gradient(180deg, var(--teal-dark) 0%, var(--teal-light) 100%);
-    color: var(--gray-dark);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+/* Reset & base styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* ================================
-   Navbar
-   ================================ */
-.navbar {
-    background-color: var(--white);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
 }
 
-.navbar-brand {
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--dark-navy), var(--steel-blue));
+    line-height: 1.6;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--light-gray);
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    text-decoration: none;
     font-weight: 600;
-    color: var(--blue) !important;
-    font-size: 1.5rem;
 }
 
-#nav-username {
-    font-weight: 500;
-    color: var(--teal-dark);
+a:hover,
+a:focus {
+    text-decoration: underline;
 }
 
-/* ================================
-   Buttons (accessible contrast)
-   ================================ */
-.btn-primary {
-    background-color: var(--blue);
-    border-color: var(--blue);
-    color: var(--white);
+/* Navigation */
+nav {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    text-align: center;
 }
-.btn-primary:hover {
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav li {
+    display: inline;
+}
+
+/* Buttons */
+button, .btn {
     background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--gray-dark);
-}
-
-.btn-success {
-    background-color: var(--green);
-    border-color: var(--green);
     color: var(--white);
-}
-.btn-success:hover {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--gray-dark);
-}
-
-.btn-secondary {
-    background-color: var(--white);
-    border: 2px solid var(--blue);
-    color: var(--blue);
-}
-.btn-secondary:hover {
-    background-color: var(--blue);
-    color: var(--white);
-}
-
-/* ================================
-   Cards
-   ================================ */
-.card {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-radius: 12px;
     border: none;
-    background-color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
-/* ================================
-   Forms
-   ================================ */
-.form-control {
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-.form-control:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 5px var(--blue);
+button:hover, .btn:hover,
+button:focus, .btn:focus {
+    background-color: #d90429; /* darker red for hover/focus */
+    outline: none;
 }
 
-/* ================================
-   Tables
-   ================================ */
-.table {
-    border-radius: 8px;
-    overflow: hidden;
-}
-.table thead {
-    background-color: var(--blue);
-    color: var(--white);
-}
-.table tbody tr:nth-of-type(odd) {
-    background-color: rgba(29, 53, 87, 0.08); /* light navy tint */
-}
-.table tbody tr:nth-of-type(even) {
-    background-color: rgba(29, 53, 87, 0.04);
-}
-.table tbody tr:hover {
-    background-color: rgba(29, 53, 87, 0.15);
+/* Containers */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-/* ================================
-   Stats list
-   ================================ */
-.list-group-item {
-    border: none;
-    background-color: var(--gray-light);
-    font-weight: 500;
-}
-.list-group-item strong {
-    color: var(--blue);
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--light-gray);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
 }
 
-/* ================================
-   Responsive tweaks
-   ================================ */
+/* Responsive design */
 @media (max-width: 768px) {
-    .card {
-        margin: 1rem;
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
