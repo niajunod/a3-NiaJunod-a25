@@ -1,10 +1,15 @@
-/* Custom color palette */
+/* styles.css */
+
+/* Color palette */
 :root {
     --pink: #E29EFA;
+    --pink-dark: #C77DFF;  /* darker for accessibility */
     --blue: #649EE0;
+    --blue-dark: #1D4E89;  /* darker for accessibility */
     --white: #FFFFFF;
     --accent: #8F9EE1;
     --dark: #2D4A1B;
+    --light-gray: #f9faff;
 }
 
 /* Body and font */
@@ -28,13 +33,13 @@ body {
 
 #nav-username {
     font-weight: 500;
-    color: var(--blue);
+    color: var(--blue-dark);
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: var(--blue);
-    border-color: var(--blue);
+    background-color: var(--blue-dark);
+    border-color: var(--blue-dark);
     color: var(--white);
 }
 
@@ -44,8 +49,8 @@ body {
 }
 
 .btn-success {
-    background-color: var(--pink);
-    border-color: var(--pink);
+    background-color: var(--pink-dark);
+    border-color: var(--pink-dark);
     color: var(--white);
 }
 
@@ -56,12 +61,12 @@ body {
 
 .btn-secondary {
     background-color: var(--white);
-    border-color: var(--blue);
-    color: var(--blue);
+    border-color: var(--blue-dark);
+    color: var(--blue-dark);
 }
 
 .btn-secondary:hover {
-    background-color: var(--blue);
+    background-color: var(--blue-dark);
     color: var(--white);
 }
 
@@ -80,8 +85,8 @@ body {
 }
 
 .form-control:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 5px var(--blue);
+    border-color: var(--blue-dark);
+    box-shadow: 0 0 5px var(--blue-dark);
 }
 
 /* Tables */
@@ -91,7 +96,7 @@ body {
 }
 
 .table thead {
-    background-color: var(--blue);
+    background-color: var(--blue-dark);
     color: var(--white);
 }
 
@@ -110,12 +115,12 @@ body {
 /* Stats list */
 .list-group-item {
     border: none;
-    background-color: #f9faff;
+    background-color: var(--light-gray);
     font-weight: 500;
 }
 
 .list-group-item strong {
-    color: var(--blue);
+    color: var(--blue-dark);
 }
 
 /* Small responsive tweaks */
