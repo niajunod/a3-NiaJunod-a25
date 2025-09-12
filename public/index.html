@@ -1,19 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Shift Tracker web app to log hours and tips, view stats, and manage shifts.">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Shift Tracker — A3</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Main navigation">
     <div class="container">
         <a class="navbar-brand" href="#">Shift Tracker</a>
@@ -51,27 +47,19 @@
     <!-- App -->
     <section id="app" class="d-none">
         <div class="row">
-            <!-- Shifts Table -->
             <div class="col-md-7">
                 <h3>My Shifts</h3>
                 <div class="table-responsive">
                     <table id="shiftsTable" class="table table-striped">
                         <caption>Shifts tied to your account</caption>
                         <thead>
-                        <tr>
-                            <th>Restaurant</th>
-                            <th>Hours</th>
-                            <th>Tips</th>
-                            <th>$ / hour</th>
-                            <th>Actions</th>
-                        </tr>
+                        <tr><th>Restaurant</th><th>Hours</th><th>Tips</th><th>$ / hour</th><th>Actions</th></tr>
                         </thead>
                         <tbody id="shiftsBody"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Add / Edit Shift -->
             <div class="col-md-5">
                 <h3>Add / Edit Shift</h3>
                 <form id="shiftForm" class="needs-validation" novalidate>
@@ -107,7 +95,6 @@
     </section>
 </main>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/script.js" defer></script>
 </body>

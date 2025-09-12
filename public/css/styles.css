@@ -1,21 +1,31 @@
-/* public/css/style.css */
-
-/* Custom color palette */
+/* ================================
+   Custom color palette (accessible)
+   ================================ */
 :root {
-    --pink: #E29EFA;
-    --blue: #649EE0;
+    --teal-dark: #006D77;      /* strong teal */
+    --teal-light: #83C5BE;     /* light teal/green */
     --white: #FFFFFF;
-    --accent: #8F9EE1;
-    --dark: #2D4A1B;
+    --gray-dark: #222222;      /* text color */
+    --gray-light: #f9faff;
+    --accent: #FFB703;         /* bright amber for highlights */
+    --green: #2D6A4F;          /* accessible success green */
+    --blue: #1D3557;           /* deep navy blue */
 }
 
-/* Body and font */
+/* ================================
+   Body and font
+   ================================ */
 body {
-    background: linear-gradient(180deg, #E29EFA 0%, #8F9EE1 100%);
-    color: #222;
+    background: linear-gradient(180deg, var(--teal-dark) 0%, var(--teal-light) 100%);
+    color: var(--gray-dark);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    margin: 0;
+    padding: 0;
 }
-/* Navbar */
+
+/* ================================
+   Navbar
+   ================================ */
 .navbar {
     background-color: var(--white);
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
@@ -23,92 +33,108 @@ body {
 
 .navbar-brand {
     font-weight: 600;
-    color: var(--dark) !important;
+    color: var(--blue) !important;
     font-size: 1.5rem;
 }
 
 #nav-username {
     font-weight: 500;
-    color: var(--blue);
+    color: var(--teal-dark);
 }
 
-/* Buttons */
+/* ================================
+   Buttons (accessible contrast)
+   ================================ */
 .btn-primary {
     background-color: var(--blue);
     border-color: var(--blue);
+    color: var(--white);
 }
-
 .btn-primary:hover {
     background-color: var(--accent);
     border-color: var(--accent);
+    color: var(--gray-dark);
 }
 
 .btn-success {
-    background-color: var(--pink);
-    border-color: var(--pink);
+    background-color: var(--green);
+    border-color: var(--green);
+    color: var(--white);
 }
-
 .btn-success:hover {
     background-color: var(--accent);
     border-color: var(--accent);
+    color: var(--gray-dark);
 }
 
 .btn-secondary {
     background-color: var(--white);
-    border-color: var(--blue);
+    border: 2px solid var(--blue);
     color: var(--blue);
 }
-
 .btn-secondary:hover {
     background-color: var(--blue);
     color: var(--white);
 }
 
-/* Cards */
+/* ================================
+   Cards
+   ================================ */
 .card {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     border-radius: 12px;
     border: none;
+    background-color: var(--white);
 }
 
-/* Forms */
+/* ================================
+   Forms
+   ================================ */
 .form-control {
     border-radius: 8px;
     border: 1px solid #ccc;
 }
-
 .form-control:focus {
     border-color: var(--blue);
     box-shadow: 0 0 5px var(--blue);
 }
 
-/* Tables */
+/* ================================
+   Tables
+   ================================ */
 .table {
     border-radius: 8px;
     overflow: hidden;
 }
-
 .table thead {
     background-color: var(--blue);
     color: var(--white);
 }
-
+.table tbody tr:nth-of-type(odd) {
+    background-color: rgba(29, 53, 87, 0.08); /* light navy tint */
+}
+.table tbody tr:nth-of-type(even) {
+    background-color: rgba(29, 53, 87, 0.04);
+}
 .table tbody tr:hover {
-    background-color: #f0f4ff;
+    background-color: rgba(29, 53, 87, 0.15);
 }
 
-/* Stats list */
+/* ================================
+   Stats list
+   ================================ */
 .list-group-item {
     border: none;
-    background-color: #f9faff;
+    background-color: var(--gray-light);
     font-weight: 500;
 }
-
 .list-group-item strong {
     color: var(--blue);
 }
 
-/* Small responsive tweaks */
+/* ================================
+   Responsive tweaks
+   ================================ */
 @media (max-width: 768px) {
     .card {
         margin: 1rem;
