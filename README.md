@@ -1,7 +1,10 @@
 Shift Tracker — A3
 
-Render Link: https://a3-NiaJunod.onrender.com
- (replace with your actual Render link)
+Render Link: https://a3-niajunod-a25.onrender.com/
+Vercel Link: https://a3-nia-junod-a25-klzz3zxrk-niajunods-projects.vercel.app/
+
+I did some research to find another web service hosting platform. And Vercel is similar to Render. At least I tried AWS, but I got confused; and it was complex. So I put both Render and Vercel link to be safe. 
+
 
 Project Summary
 
